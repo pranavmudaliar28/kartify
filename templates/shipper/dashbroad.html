@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>ShipperDashboard &mdash; Kartify</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/fontawesome/css/all.min.css'%}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/jqvmap/dist/jqvmap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/summernote/summernote-bs4.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css'%}">
+    <link rel="stylesheet"
+          href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css'%}">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/components.css'%}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+
+    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- /END GA --></head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        {% include "shipper/header.html"%}
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="card-stats">
+                                <div class="card-stats-title">Order Statistics -
+<!--                                    <div class="dropdown d-inline">-->
+<!--                                        <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"-->
+<!--                                           id="orders-month">August</a>-->
+<!--                                        <ul class="dropdown-menu dropdown-menu-sm">-->
+<!--                                            <li class="dropdown-title">Select Month</li>-->
+<!--                                            <li><a href="#" class="dropdown-item">January</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">February</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">March</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">April</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">May</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">June</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">July</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item active">August</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">September</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">October</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">November</a></li>-->
+<!--                                            <li><a href="#" class="dropdown-item">December</a></li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="card-stats-items">
+                                    <div class="card-stats-item">
+                                        <div class="card-stats-item-count">{{data}}</div>
+                                        <div class="card-stats-item-label">Pending</div>
+                                    </div>
+<!--                                    <div class="card-stats-item">-->
+<!--                                        <div class="card-stats-item-count">12</div>-->
+<!--                                        <div class="card-stats-item-label">Shipping</div>-->
+<!--                                    </div>-->
+                                    <div class="card-stats-item">
+                                        <div class="card-stats-item-count">{{data1}}</div>
+                                        <div class="card-stats-item-label">Completed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-icon shadow-primary bg-primary">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Orders</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{data}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Invoices</h4>
+                                <div class="card-header-action">
+                                    <a href="ordertable" class="btn btn-danger">View More <i
+                                            class="fas fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-invoice">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Invoice ID</th>
+                                            <th>Customer Name</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        {% for i in order %}
+                                        <tr>
+                                            <td><a href="Orderdetail/{{i.id}}">{{i.id}}</a></td>
+                                            <td class="font-weight-600">{{i.firstname}} {{i.lastname}}</td>
+                                            <td class="font-weight-600">{{i.product}}</td>
+                                            <td class="font-weight-600">₹{{i.total}}</td>
+                                            <td>
+                                                <a href="Orderdetail/{{i.id}}" class="btn btn-primary">Detail</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% include "shipper/footer.html" %}
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="{% static 'shipper/assets/modules/jquery.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/popper.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/tooltip.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/bootstrap/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/nicescroll/jquery.nicescroll.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/moment.min.js'%}"></script>
+<script src="{% static 'shipper/assets/js/stisla.js'%}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'shipper/assets/modules/jquery.sparkline.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chart.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/owlcarousel2/dist/owl.carousel.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/summernote/summernote-bs4.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chocolat/dist/js/jquery.chocolat.min.js'%}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+     alertify.set('notifier','position', 'top-right');
+     {% for msg in messages %}
+     alertify.success('{{msg}}');
+     {% endfor %}
+
+
+</script>
+<!-- Page Specific JS File -->
+<script src="{% static 'shipper/assets/js/page/index.js'%}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'shipper/assets/js/scripts.js'%}"></script>
+<script src="{% static 'shipper/assets/js/custom.js'%}"></script>
+</body>
+</html>

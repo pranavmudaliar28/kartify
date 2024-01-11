@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Shipper Profile &mdash; Kartify</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/fontawesome/css/all.min.css'%}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/jqvmap/dist/jqvmap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/summernote/summernote-bs4.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css'%}">
+    <link rel="stylesheet"
+          href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css'%}">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/components.css'%}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+
+
+
+    </script>
+    <!-- /END GA --></head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        {% include "shipper/header.html" %}
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Profile</h1>
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item active"><a href="dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item">Profile</div>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <h2 class="section-title">Hi, {{request.session.shippername}}!</h2>
+                    <p class="section-lead">
+                        Change information about yourself on this page.
+                    </p>
+
+                    <div class="row mt-sm-4">
+                        <div class="col-12 col-md-12 col-lg-7">
+                            <div class="card">
+                                <form method="post" class="needs-validation" novalidate="">
+                                    <div class="card-header">
+                                        <h4>Edit Profile</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-12">
+                                                <label> Name</label>
+                                                <input type="text" class="form-control"
+                                                       value="{{request.session.shippername}}" required="">
+                                                <div class="invalid-feedback">
+                                                    Please fill in the first name
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-7 col-12">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control"
+                                                       value="{{request.session.shipperemail}}" required="">
+                                                <div class="invalid-feedback">
+                                                    Please fill in the email
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-5 col-12">
+                                                <label>Phone</label>
+                                                <input type="tel" class="form-control"
+                                                       value="{{request.session.shipperphonenumber}}">
+                                            </div>
+                                            <div class="form-group col-md-5 col-12">
+                                                <label>Address</label>
+                                                <textarea class="form-control"
+                                                          placeholder="Enter a shipper address" name="address"
+                                                           required>{{request.session.shipperaddress}}</textarea>
+                                            </div>
+<!--                                            <div class="form-group" id="simple-date1">-->
+<!--                                                <label for="simpleDataInput">DOB</label>-->
+<!--                                                <div class="input-group date">-->
+<!--                                                    <div class="input-group-prepend">-->
+<!--                                                        <span class="input-group-text"><i-->
+<!--                                                                class="fas fa-calendar"></i></span>-->
+<!--                                                    </div>-->
+<!--                                                    <input type="date" class="form-control" name="dob"-->
+<!--                                                         >-->
+<!--                                                    {{example_form.dob}}{{request.session.dob}}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                        </div>
+                                        <!--<div class="card-footer text-right">
+                                            <button class="btn btn-primary">Save Changes</button>
+                                        </div>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% include "shipper/footer.html" %}
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="{% static 'shipper/assets/modules/jquery.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/popper.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/tooltip.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/bootstrap/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/nicescroll/jquery.nicescroll.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/moment.min.js'%}"></script>
+<script src="{% static 'shipper/assets/js/stisla.js'%}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'shipper/assets/modules/jquery.sparkline.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chart.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/owlcarousel2/dist/owl.carousel.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/summernote/summernote-bs4.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chocolat/dist/js/jquery.chocolat.min.js'%}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{% static 'shipper/assets/js/page/index.js'%}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'shipper/assets/js/scripts.js'%}"></script>
+<script src="{% static 'shipper/assets/js/custom.js'%}"></script>
+</body>
+</html>

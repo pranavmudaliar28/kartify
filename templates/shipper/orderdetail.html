@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>order detail &mdash; Kartify</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/fontawesome/css/all.min.css'%}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/jqvmap/dist/jqvmap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/summernote/summernote-bs4.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css'%}">
+    <link rel="stylesheet"
+          href="{% static 'shipper/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css'%}">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'shipper/assets/css/components.css'%}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+
+
+
+    </script>
+    <!-- /END GA --></head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        {% include "shipper/header.html" %}
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item active"><a href="/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item">Order Detail</div>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <h2 class="section-title">Order Detail</h2>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Order Detail</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>User-Name</label>
+                                        <p class="form-control">{{data.firstname}} {{data.lastname}}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Name</label>
+                                        <p class="form-control purchase-code">{{data.product}}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    ₹
+                                                </div>
+                                            </div>
+                                            <p class="form-control currency">{{data.price}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Total Price</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    ₹
+                                                </div>
+                                            </div>
+                                            <p class="form-control currency">{{data.total}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                            </div>
+                                            <p class="form-control phone-number">{{data.phonenumber}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <p class="form-control invoice-input">{{data.address}}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pincode</label>
+                                        <p class="form-control datemask">{{data.pincode}}</p>
+                                    </div>
+                                     <form action="/confirm_otp" method="post">
+                                        {% csrf_token %}
+                                                     <input type="hidden" name="id" value="{{data.id}}">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control " name="otp"
+                                                   placeholder="Enter otp ">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                                data-backdrop="false"
+                                                data-target="#exampleModal" data-whatever="@mdo">Submit
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="section-title">Product Image</div>
+                                <div class="card-body">
+                                    <div class="gallery gallery-md">
+                                        <div class="gallery-item" data-image="{{data.image}}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% include "shipper/footer.html" %}
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="{% static 'shipper/assets/modules/jquery.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/popper.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/tooltip.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/bootstrap/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/nicescroll/jquery.nicescroll.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/moment.min.js'%}"></script>
+<script src="{% static 'shipper/assets/js/stisla.js'%}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'shipper/assets/modules/jquery.sparkline.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chart.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/owlcarousel2/dist/owl.carousel.min.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/summernote/summernote-bs4.js'%}"></script>
+<script src="{% static 'shipper/assets/modules/chocolat/dist/js/jquery.chocolat.min.js'%}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{% static 'shipper/assets/js/page/index.js'%}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'shipper/assets/js/scripts.js'%}"></script>
+<script src="{% static 'shipper/assets/js/custom.js'%}"></script>
+</body>
+</html>

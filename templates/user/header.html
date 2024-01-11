@@ -1,0 +1,256 @@
+{% load static %}
+
+<!-- header-start -->
+<header class="header d-blue-bg">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-inner">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-7">
+                        <div class="header-inner-start">
+                            <div class="support d-none d-sm-block">
+                                <p>Need Help? <a href="tel:7984544929">+91 7984544929</a> {{localtime}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-5 d-none d-lg-block">
+                        <div class="header-inner-end text-md-end">
+                            <div class="ovic-menu-wrapper">
+                                <ul>
+                                    <li><a href="{% url 'Aboutus'  %}">About Us</a></li>
+                                    <li><a href="{% url 'Trackorder' %}">Track Order</a></li>
+                                    <li><a href="{% url 'Contactus'  %}">Contact Us</a></li>
+                                    <li><a href="{% url 'faq'  %}">FAQs</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-mid">
+        <div class="container">
+            <div class="heade-mid-inner">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
+                        <div class="header__info">
+                            <div class="logo">
+                                <a href="{% url 'Home'  %}" class="logo-image"><img
+                                        src="{% static 'user/assets/img/logo/20230119_104551_0000-removebg-preview.png'%}"
+                                        alt="logo"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                        <div class="header__search">
+                            <form action="/search/" method="get">
+                                <div class="header__search-box">
+                                    <input class="search-input" type="text" placeholder="I'm shopping for..."
+                                           name="query" id="query"/>
+                                    <button class="button" type="submit"><i class="far fa-search"></i></button>
+                                </div>
+                                <div class="header__search-cat">
+<!--                                    <select>-->
+<!--                                        <option>All Categories</option>-->
+<!--                                        {% for i in main_category %}-->
+<!--                                         <a href="/maincat/{{i.id}}"><option >{{i.name}}</option></a>-->
+<!--                                        {% endfor %}-->
+<!--                                    </select>-->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+                        <div class="header-action">
+                            {% if user.is_login %}
+                            <div class="block-userlink">
+                                <a class="icon-link" href="myprofile">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                    <span class="sub">Logout</span>
+                                    My Profile </span>
+                                </a>
+                            </div>
+                            {% else %}
+                               <div class="block-userlink">
+                                <a class="icon-link" href="{% url 'signin'  %}">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                    <span class="sub">Login </span>
+                                    My Account </span>
+                                </a>
+                            </div>
+                            {% endif %}
+                            <div class="block-cart action">
+                                <a class="icon-link" href="{% url 'cart'  %}">
+                                    <i class="flaticon-shopping-bag"></i>
+                                    <span class="count">{{request.session.cart|length}}</span>
+                                    <span class="text">
+                                    <span class="sub">Your Cart:</span>
+                                   ₹{{cart_total_amount}} </span>
+                                </a>
+                                <div class="cart">
+                                    <div class="cart__mini">
+                                        <ul>
+                                            <li>
+                                                <div class="cart__title">
+                                                    <h4>Your Cart</h4>
+                                                    <span>({{request.session.cart|length}} Item in Cart)</span>
+                                                </div>
+                                            </li>
+                                            {% for key,value in request.session.cart.items %}
+                                            <li>
+                                                <div class="cart__item d-flex justify-content-between align-items-center">
+                                                    <div class="cart__inner d-flex">
+                                                        <div class="cart__thumb">
+                                                            <a href="{% url 'Product_detail' value.product_id %}">
+                                                                <img src="{{value.Featured_image}}" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="cart__details">
+                                                            <h6><a href="{% url 'Product_detail' value.product_id %}">
+                                                                {{value.product_name}} </a></h6>
+                                                            <div class="cart__price">
+                                                                <span>₹{{value.price}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart__del">
+                                                        <a href="{% url 'item_clear' key %}"><i
+                                                                class="fal fa-times"></i></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                            <li>
+                                                <div class="cart__sub d-flex justify-content-between align-items-center">
+                                                    <h6>Subtotal</h6>
+                                                    <span class="cart__sub-total">₹{{cart_total_amount}}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'cart_detail'  %}" class="wc-cart mb-10">View cart</a>
+                                                <a href="{% url 'Checkout'  %}" class="wc-checkout">Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header__bottom">
+        <div class="container">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-3">
+                    <div class="cat__menu-wrapper side-border d-none d-lg-block">
+                        <div class="cat-toggle">
+                            <button type="button" class="cat-toggle-btn cat-toggle-btn-1"><i class="fal fa-bars"></i>Category
+                            </button>
+                            <div class="cat__menu">
+                                <nav id="mobile-menu" style="display: block;">
+                                    <ul>
+                                        {% for i in main_category %}
+                                        <li>
+                                            <a href="{% url 'maincat' i.id %}">{{i.name}} <i class="far fa-angle-down"></i></a>
+                                            <ul class="mega-menu">
+                                                {% for cat in i.category_set.all %}
+                                                <li><a href="{% url 'cat' cat.id %}" style="color:orange;">{{cat.name}}</a>
+                                                    <ul class="mega-item">
+                                                        {% for sub_cat in cat.sub_category_set.all %}
+                                                        <li><a href="{% url 'subcat' sub_cat.id %}">{{sub_cat.name}}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+                                        <!--- <li><a href="Shop/{{i.id}}">Health &amp; Beauty</a></li>-->
+                                    </ul>
+                                    <ul>
+                                        <li><a href="{% url 'myprofile'  %}">My profile</a></li>
+                                        <li><a href="{% url 'yourorder'  %}"> Your order</a></li>
+                                        <li><a href="{% url 'cart'  %}">Cart</a></li>
+                                        <li><a href="{% url 'Trackorder'  %}">Track Your Order</a></li>
+                                        <li><a href="{% url 'signin'  %}">Register</a></li>
+                                        <li><a href="{% url 'login'  %}">Login</a></li>
+                                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-3">
+                    <div class="header__bottom-left d-flex d-xl-block align-items-center">
+                        <div class="side-menu d-lg-none mr-20">
+                            <button type="button" class="side-menu-btn offcanvas-toggle-btn"><i class="fas fa-bars"></i>
+                            </button>
+                        </div>
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'Home'  %}" class="active">Home</a>
+                                    </li>
+                                    <li><a href="{% url 'Aboutus'  %}">About Us</a></li>
+                                    <li class="has-mega"><a href="{% url 'Shop'  %}">Product </a>
+                                    </li>
+                                    <li>
+                                        <a>My Account <i class="far fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="{% url 'myprofile'  %}">My Profile</a></li>
+                                            <li><a href="{% url 'yourorder'  %}">Your order</a></li>
+                                            <li><a href="{% url 'cart'  %}">Cart</a></li>
+                                            <li><a href="{% url 'Checkout'  %}">Checkout</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            <li><a href="{% url 'logout'  %}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header-end -->
+
+<!-- offcanvas area start -->
+<div class="offcanvas__area">
+    <div class="offcanvas__wrapper">
+        <div class="offcanvas__close">
+            <button class="offcanvas__close-btn" id="offcanvas__close-btn">
+                <i class="fal fa-times"></i>
+            </button>
+        </div>
+        <div class="offcanvas__content">
+            <div class="offcanvas__logo mb-40">
+                <a href="{% url 'Home'  %}">
+                    <img src="{% static 'user/assets/img/logo/20230119_104551_0000.png'%}" alt="logo">
+                </a>
+            </div>
+            <div class="offcanvas__search mb-25">
+                <form action="/search/" method="get">
+                    <input type="text" placeholder="What are you searching for?" id="query" name="query"/>
+                    <button type="submit"><i class="far fa-search"></i></button>
+                </form>
+            </div>
+            <div class="mobile-menu fix"></div>
+            <div class="offcanvas__action">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- offcanvas area end -->
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
